@@ -4,18 +4,32 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { useRouter } from "next/router";
+import Landing from "../../components/Landing";
+import Box from "@mui/material/Box";
+
 function MoviesList({ movies }) {
   return (
     <>
       <h2>Product 1</h2>
       <List>
-        {movies.map((movie) => {
-          return (
-            <ListItem key={movie._id}>
-              <ListItemText primary={movie.title} secondary={movie.language} />
-            </ListItem>
-          );
-        })}
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {movies.map((movie) => {
+            return (
+              // <ListItem key={movie._id}>
+              //   <ListItemText primary={movie.title} secondary={movie.language} />
+              //   <ListItemText primary={movie.stars} secondary={movie.music} />
+              // </ListItem>
+              <Landing movie={movie} />
+            );
+          })}
+        </Box>
       </List>
     </>
   );
@@ -23,11 +37,10 @@ function MoviesList({ movies }) {
 
 export default MoviesList;
 
-export async function getStaticProps(context) {
-  //   const router = useRouter();
-  console.log(context);
+export async function getStaticProps() {
   const data = await axios.get(
-    "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies"
+    // "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies"
+    "http://localhost:8000/api/movies"
   );
   const movies = await data.data.data;
   return {
