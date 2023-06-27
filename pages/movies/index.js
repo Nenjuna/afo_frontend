@@ -39,8 +39,8 @@ export default MoviesList;
 
 export async function getStaticProps() {
   const data = await axios.get(
-    // "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies"
-    "http://localhost:8000/api/movies"
+    "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies"
+    // "http://localhost:8000/api/movies"
   );
   const movies = await data.data.data;
   return {
