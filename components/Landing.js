@@ -11,7 +11,7 @@ export default function Landing({ movie }) {
         <CardActionArea>
           <CardMedia
             component="img"
-            height="140"
+            height="240"
             image={`https://masstamilan.dev` + movie.img}
             alt={movie.title}
           />

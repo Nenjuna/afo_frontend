@@ -17,17 +17,13 @@ function MoviesList({ movies }) {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
+            alignContent: "space-between",
             alignItems: "center",
+            gap: "20px",
           }}
         >
           {movies.map((movie) => {
-            return (
-              // <ListItem key={movie._id}>
-              //   <ListItemText primary={movie.title} secondary={movie.language} />
-              //   <ListItemText primary={movie.stars} secondary={movie.music} />
-              // </ListItem>
-              <Landing movie={movie} />
-            );
+            return <Landing movie={movie} />;
           })}
         </Box>
       </List>
