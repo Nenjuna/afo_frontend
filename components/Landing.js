@@ -6,11 +6,14 @@ import { CardActionArea } from "@mui/material";
 import Link from "@mui/material/Link";
 
 export default function Landing({ movie }) {
+  // console.log(movie);
   return (
     <>
       <Card sx={{ maxWidth: 280 }}>
         <Link
-          href={"/movies/" + movie.title.replaceAll(" ", "_").toLowerCase()}
+          href={`/${movie?.language.toLowerCase()}/${movie.title
+            .replaceAll(" ", "_")
+            .toLowerCase()}`}
           style={{ textDecoration: "none" }}
           color="inherit"
         >

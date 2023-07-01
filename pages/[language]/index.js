@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Landing from "../../components/Landing";
 import Box from "@mui/material/Box";
-import Header from "../../components/Header";
 import Head from "next/head";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -14,20 +13,16 @@ function MoviesList(props) {
   const router = useRouter();
   const [page, setPage] = useState(parseInt(router.query.page) || 1);
   const [language, setLanguage] = useState(router.query.language || "tamil");
-  console.log(props);
   const { data } = useQuery(
     ["movie", page, language],
     async () => {
-      const movies = await axios.get(
-        "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies",
-        {
-          params: {
-            language: language,
-            page: page,
-          },
-        }
-      );
-      return movies.data.data;
+      const movies = await axios.get("http://localhost:8000/api/movies", {
+        params: {
+          language: language,
+          page: page,
+        },
+      });
+      return movies.data;
     },
     {
       keepPreviousData: true,
@@ -49,14 +44,13 @@ function MoviesList(props) {
         <title>Download Tamil Movies</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header />
       <List>
         <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
             flexGrow: 1,
-            padding: 5,
+            paddingLeft: 5,
             maxWidth: {
               xs: "100%",
               md: "70%",
@@ -64,14 +58,14 @@ function MoviesList(props) {
             gap: "20px",
           }}
         >
-          {data?.map((movie) => {
+          {data?.data.map((movie) => {
             return <Landing movie={movie} key={movie._id} />;
           })}
         </Box>
       </List>
       <Stack spacing={2}>
         <Pagination
-          count={10}
+          count={data?.count}
           variant="outlined"
           shape="rounded"
           color="primary"
@@ -92,16 +86,13 @@ export async function getServerSideProps(context) {
   if (context.query.language) language = context.query.language;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(["movie", page, language], async () => {
-    const movies = await axios.get(
-      "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies",
-      {
-        params: {
-          language: language,
-          page: page,
-        },
-      }
-    );
-    return movies.data.data;
+    const movies = await axios.get("http://localhost:8000/api/movies", {
+      params: {
+        language: language,
+        page: page,
+      },
+    });
+    return movies.data;
   });
 
   return { props: { dehydratedState: dehydrate(queryClient) } };
