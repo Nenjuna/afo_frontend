@@ -16,12 +16,15 @@ function MoviesList(props) {
   const { data } = useQuery(
     ["movie", page, language],
     async () => {
-      const movies = await axios.get("http://localhost:8000/api/movies", {
-        params: {
-          language: language,
-          page: page,
-        },
-      });
+      const movies = await axios.get(
+        "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies",
+        {
+          params: {
+            language: language,
+            page: page,
+          },
+        }
+      );
       return movies.data;
     },
     {
@@ -86,12 +89,15 @@ export async function getServerSideProps(context) {
   if (context.query.language) language = context.query.language;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(["movie", page, language], async () => {
-    const movies = await axios.get("http://localhost:8000/api/movies", {
-      params: {
-        language: language,
-        page: page,
-      },
-    });
+    const movies = await axios.get(
+      "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies",
+      {
+        params: {
+          language: language,
+          page: page,
+        },
+      }
+    );
     return movies.data;
   });
 
