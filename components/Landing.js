@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import Link from "next/link";
+import Link from "@mui/material/Link";
 
 export default function Landing({ movie }) {
   return (
@@ -12,6 +12,7 @@ export default function Landing({ movie }) {
         <Link
           href={"/movies/" + movie.title.replaceAll(" ", "_").toLowerCase()}
           style={{ textDecoration: "none" }}
+          color="inherit"
         >
           <CardActionArea sx={{ maxWidth: 300, height: "100%" }}>
             <CardMedia
