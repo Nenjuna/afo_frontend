@@ -10,7 +10,10 @@ export default function MusicCover({ movie }) {
       <Box
         sx={{
           backgroundColor: "primary",
-          padding: 5,
+          padding: {
+            sx: 2,
+            md: 5,
+          },
           paddingTop: 1,
         }}
       >
@@ -22,6 +25,15 @@ export default function MusicCover({ movie }) {
               md: "row",
             },
             flexWrap: "wrap",
+            justifyItems: "center",
+            alignItems: {
+              xs: "center",
+              md: "flex-start",
+            },
+            padding: {
+              sx: 2,
+              md: 5,
+            },
           }}
         >
           <CardMedia
@@ -38,19 +50,38 @@ export default function MusicCover({ movie }) {
               alignItems: "flex-end",
             }}
           >
-            <CardContent sx={{ flex: "1 0 auto", flexWrap: "wrap" }}>
-              <Typography component="span" variant="h7">
+            <CardContent
+              sx={{
+                flex: "1",
+                flexWrap: "wrap",
+                width: {
+                  sx: "100%",
+                },
+              }}
+            >
+              <Typography
+                component="span"
+                variant="h7"
+                sx={{
+                  wordWrap: "break-word",
+                }}
+              >
                 Album
               </Typography>
               <Typography
                 sx={{
                   fontWeight: "bold",
                   wordWrap: "break-word",
-                  whiteSpace: "pre-line",
+                  align: "center",
+                  fontSize: {
+                    xs: "2rem",
+                    md: "6rem",
+                  },
                 }}
                 variant="h1"
+                component="h1"
               >
-                {movie.title}
+                {movie?.title}
               </Typography>
               <Box
                 sx={{
@@ -66,7 +97,7 @@ export default function MusicCover({ movie }) {
                   {movie.music}
                 </Typography>
                 | <Typography>{movie.year}</Typography> |{" "}
-                <Typography>{movie.songs.length} Songs</Typography>
+                <Typography>{movie?.songs?.length} Songs</Typography>
               </Box>
             </CardContent>
           </Box>

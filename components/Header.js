@@ -12,28 +12,18 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const navItems = ["Latest Update", "Movie Index", "Contact"];
-
-const drawer = (
-  <Box sx={{ textAlign: "center" }}>
-    <Typography variant="h6" sx={{ md: 2 }} component="div">
-      MUI
-    </Typography>
-    <Divider />
-    <List>
-      {navItems.map((item) => (
-        <ListItem key={item} disablePadding>
-          <ListItemButton sx={{ textAlign: "center" }}>
-            <ListItemText primary={item} />
-          </ListItemButton>
-        </ListItem>
-      ))}
-    </List>
-  </Box>
-);
 export default function Headers() {
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{
+        display: "flex",
+        alignItems: {
+          xs: "center",
+          md: "flex-start",
+        },
+      }}
+    >
       <Toolbar>
         <Typography component="div" variant="h6">
           All For One

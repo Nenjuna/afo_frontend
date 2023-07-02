@@ -13,12 +13,15 @@ import PlayCircleOutlineOutlinedIcon from "@mui/icons-material/PlayCircleOutline
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 export default function Songs({ songs }) {
-  console.log(songs);
+  //   console.log(songs);
   return (
     <Box
       sx={{
         backgroundColor: "primary",
-        padding: 5,
+        padding: {
+          xs: 2,
+          md: 5,
+        },
         paddingTop: 1,
       }}
     >
@@ -33,7 +36,7 @@ export default function Songs({ songs }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {songs.map((song, index) => (
+            {songs?.map((song, index) => (
               <TableRow
                 key={song.title}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -46,7 +49,9 @@ export default function Songs({ songs }) {
                     <Typography>
                       <b>{song.title}</b>
                     </Typography>
-                    <Typography>{song.singers}</Typography>
+                    <Typography color="text.secondary" fontSize="0.8rem">
+                      {song.singers}
+                    </Typography>
                   </Stack>
                 </TableCell>
                 <TableCell align="left">

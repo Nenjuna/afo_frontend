@@ -67,9 +67,13 @@ export default function MyApp(props) {
               sx={{
                 display: "flex",
                 flexWrap: "wrap",
-                padding: 5,
+                padding: {
+                  sx: 2,
+                  md: 5,
+                },
                 paddingBottom: 2,
                 paddingTop: 2,
+                paddingLeft: 2,
               }}
             >
               <Breadcrumb breads={breadcrumbs} />

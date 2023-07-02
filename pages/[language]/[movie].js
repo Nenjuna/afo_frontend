@@ -10,6 +10,7 @@ export const getServerSideProps = async (context) => {
     `https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies/${query}`
   );
   const movie = await data.data.data[0];
+  // console.log(movie);
   return { props: { movie } };
 };
 
