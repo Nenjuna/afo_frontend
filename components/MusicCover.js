@@ -30,15 +30,18 @@ export default function MusicCover({ movie }) {
               xs: "center",
               md: "flex-start",
             },
-            padding: {
-              sx: 2,
-              md: 5,
-            },
           }}
         >
           <CardMedia
             component="img"
-            sx={{ width: 200, align: "center" }}
+            sx={{
+              width: 200,
+              align: "center",
+              "&::before": {
+                content: '" "',
+                display: "block",
+              },
+            }}
             image={`https://masstamilan.dev` + movie.img}
             alt={movie.title}
             loading="lazy"
