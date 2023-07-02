@@ -67,11 +67,14 @@ export default function Songs({ songs, url }) {
     async function loadMusic() {
       //   console.log(url);
       const murl = url.replace("tamilpaatu.com", "masstamilan.dev");
-      const data = await axios.get(`http://localhost:8000/getMovie`, {
-        params: {
-          url: murl,
-        },
-      });
+      const data = await axios.get(
+        `https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/getMovie`,
+        {
+          params: {
+            url: murl,
+          },
+        }
+      );
       const music = await data.data.songs;
       console.log(music);
       setSongs(music);
