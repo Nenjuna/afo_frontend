@@ -6,11 +6,8 @@ import Songs from "../../components/Songs";
 
 export const getServerSideProps = async (context) => {
   const query = context.query.movie;
-  const data = await axios.get(
-    `https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies/${query}`
-  );
-  const movie = await data.data.data[0];
-  // console.log(movie);
+  const data = await axios.get(`http://localhost:8000/api/movies/${query}`);
+  const movie = await data.data.data;
   return { props: { movie } };
 };
 
@@ -22,7 +19,7 @@ export default function MovieDetails({ movie }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <MusicCover movie={movie} />
-      <Songs songs={movie.songs} />
+      <Songs songs={movie.songs} url={movie.url} />
       {/* <h1>Movie details {movie.title}</h1> */}
     </>
   );

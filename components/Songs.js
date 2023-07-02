@@ -11,9 +11,74 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import PlayCircleOutlineOutlinedIcon from "@mui/icons-material/PlayCircleOutlineOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-export default function Songs({ songs }) {
-  //   console.log(songs);
+export default function Songs({ songs, url }) {
+  const [songstate, setSongs] = useState([]);
+  async function handleClick(e, songname) {
+    const baseURL = "https://masstamilan.dev";
+    const found = songstate.filter((song) => song.title === songname);
+    try {
+      const [song128, song320] = await Promise.all([
+        axios.get(
+          "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/getSongURL",
+          {
+            params: {
+              url: baseURL + found[0].songURL128,
+            },
+          }
+        ),
+        axios.get(
+          "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/getSongURL",
+          {
+            params: {
+              url: baseURL + found[0].songURL320,
+            },
+          }
+        ),
+      ]);
+      console.log(song128, song320);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function playAudio(e, songname) {
+    const baseURL = "https://masstamilan.dev";
+    const found = songstate.filter((song) => song.title === songname);
+    try {
+      const audioData = await axios.get(
+        "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/getSongURL",
+        {
+          params: {
+            url: baseURL + found[0].songURL128,
+          },
+        }
+      );
+      const audio = audioData.data;
+      const player = new Audio(audio);
+      player.play();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    async function loadMusic() {
+      //   console.log(url);
+      const murl = url.replace("tamilpaatu.com", "masstamilan.dev");
+      const data = await axios.get(`http://localhost:8000/getMovie`, {
+        params: {
+          url: murl,
+        },
+      });
+      const music = await data.data.songs;
+      console.log(music);
+      setSongs(music);
+    }
+    loadMusic();
+  }, []);
+
   return (
     <Box
       sx={{
@@ -55,12 +120,12 @@ export default function Songs({ songs }) {
                   </Stack>
                 </TableCell>
                 <TableCell align="left">
-                  <IconButton>
+                  <IconButton onClick={(e) => playAudio(e, song.title)}>
                     <PlayCircleOutlineOutlinedIcon />
                   </IconButton>
                 </TableCell>
                 <TableCell align="left">
-                  <IconButton>
+                  <IconButton onClick={(e) => handleClick(e, song.title)}>
                     <FileDownloadOutlinedIcon />
                   </IconButton>
                 </TableCell>
