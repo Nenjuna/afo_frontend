@@ -38,7 +38,6 @@ export default function Songs({ songs, url }) {
           }
         ),
       ]);
-      console.log(song128, song320);
     } catch (error) {
       console.log(error);
     }
