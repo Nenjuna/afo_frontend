@@ -16,7 +16,7 @@ export const getServerSideProps = async (context) => {
 
 export default function MovieDetails({ movie }) {
   const router = useRouter();
-  console.log(router);
+  // console.log(router);
   const headTitle = `${movie.title} ${movie.language} Songs Download - AFO`;
   const headDescription = `${
     movie.title
