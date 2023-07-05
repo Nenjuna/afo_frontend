@@ -1,17 +1,14 @@
-import useSound from "use-sound";
 import IconButton from "@mui/material/IconButton";
 import PlayCircleOutlineOutlinedIcon from "@mui/icons-material/PlayCircleOutlineOutlined";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import PauseCircleOutlineOutlinedIcon from "@mui/icons-material/PauseCircleOutlineOutlined";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-function Player({ songstate, audioRef, curr }) {
+function Player({ songstate, curr }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [songURL, setSongURL] = useState("");
   const playRef = useRef(null);
   const togglePlayPause = async () => {
-    console.log(curr);
     const baseURL = "https://masstamilan.dev";
     const found = songstate.filter((song) => song.title === curr);
     if (!isPlaying && songURL.length == "") {
@@ -25,7 +22,8 @@ function Player({ songstate, audioRef, curr }) {
           }
         );
         const audio = audioData.data;
-        // playRef.current = new Audio(songURL);
+
+        playRef.current = new Audio(audio);
         setSongURL(audio);
       } catch (error) {
         console.log(error);
@@ -35,9 +33,7 @@ function Player({ songstate, audioRef, curr }) {
   };
 
   useEffect(() => {
-    // console.log(songURL);
     if (isPlaying) {
-      playRef.current = new Audio(songURL);
       playRef.current.play();
     } else {
       playRef.current.pause();

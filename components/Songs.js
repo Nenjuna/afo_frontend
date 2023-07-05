@@ -16,7 +16,6 @@ import Player from "./Player";
 
 export default function Songs({ songs, url }) {
   const [songstate, setSongs] = useState([]);
-  const audioRef = useRef(null);
   async function handleClick(e, songname) {
     const baseURL = "https://masstamilan.dev";
     const found = songstate.filter((song) => song.title === songname);
@@ -102,15 +101,8 @@ export default function Songs({ songs, url }) {
                   </Stack>
                 </TableCell>
                 <TableCell align="left">
-                  {/* <IconButton
-                    onClick={(e) => playAudio(e, song.title, currentSong)}
-                  >
-                    <PlayCircleOutlineOutlinedIcon />
-                  </IconButton> */}
-
                   <Player
                     {...{
-                      audioRef,
                       songstate,
                       curr: song.title,
                     }}
