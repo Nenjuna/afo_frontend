@@ -66,16 +66,30 @@ function MoviesList(props) {
           })}
         </Box>
       </List>
-      <Stack spacing={2}>
-        <Pagination
-          count={data?.count}
-          variant="outlined"
-          shape="rounded"
-          color="primary"
-          page={page}
-          onChange={handlePageChange}
-        />
-      </Stack>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          flexGrow: 1,
+          paddingLeft: 5,
+          maxWidth: {
+            xs: "100%",
+            md: "70%",
+          },
+          gap: "20px",
+        }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            count={data?.count}
+            variant="outlined"
+            shape="rounded"
+            color="primary"
+            page={page}
+            onChange={handlePageChange}
+          />
+        </Stack>
+      </Box>
     </>
   );
 }

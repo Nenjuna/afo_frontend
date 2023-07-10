@@ -5,10 +5,9 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Link from "@mui/material/Link";
 
-export default function Landing({ movie }) {
-  // console.log(movie);
+export default function MoreBy({ movie }) {
   return (
-    <Card sx={{ maxWidth: 280 }}>
+    <Card sx={{ maxWidth: 280, maxHeight: 300 }}>
       <Link
         href={`/${movie?.language.toLowerCase()}/${movie.title
           .replaceAll(" ", "_")
@@ -16,26 +15,20 @@ export default function Landing({ movie }) {
         style={{ textDecoration: "none" }}
         color="inherit"
       >
-        <CardActionArea sx={{ maxWidth: 300, height: "100%" }}>
+        <CardActionArea sx={{ maxWidth: 200, height: "100%" }}>
           <CardMedia
             component="img"
-            height="220"
+            height="190"
             image={`https://masstamilan.dev` + movie.img}
             alt={movie.title}
             loading="lazy"
           />
           <CardContent height="300">
-            <Typography gutterBottom variant="h5" component="h5">
+            <Typography gutterBottom variant="h5" component="h5" noWrap={true}>
               {movie.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              <b>Starring:</b> {movie.stars.join(" , ")}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <b>Music:</b> {movie.music.join(" , ")}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <b>Director:</b> {movie.director}
+              {movie.year}
             </Typography>
           </CardContent>
         </CardActionArea>

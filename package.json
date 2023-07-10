@@ -20,8 +20,7 @@
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-query": "^3.39.3",
-    "use-sound": "^4.0.1"
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "eslint": "latest",
