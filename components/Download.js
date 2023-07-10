@@ -1,9 +1,8 @@
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
@@ -47,41 +46,24 @@ function Download({ songstate, curr }) {
   return (
     <>
       {isDownload ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            flexWrap: "wrap",
-            gap: 1,
-          }}
-        >
+        <Stack spacing={1} direction={{ xs: "column", md: "row" }}>
           <Button
             variant="contained"
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              alignContent: "space-between",
-            }}
             startIcon={<DownloadForOfflineIcon />}
-            download={downURL.d128}
+            href={downURL.d128}
+            target="_blank"
           >
             128 KBPS
           </Button>
           <Button
             variant="contained"
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              alignContent: "space-between",
-            }}
             startIcon={<DownloadForOfflineIcon />}
-            download={downURL.d320}
+            href={downURL.d320}
+            target="_blank"
           >
             320 KBPS
           </Button>
-        </Box>
+        </Stack>
       ) : (
         <IconButton onClick={downloadFile}>
           <FileDownloadOutlinedIcon />
