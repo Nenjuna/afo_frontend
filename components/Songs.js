@@ -8,40 +8,13 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import Player from "./Player";
+import Download from "./Download";
 
 export default function Songs({ songs, url }) {
   const [songstate, setSongs] = useState([]);
-  async function handleClick(e, songname) {
-    const baseURL = "https://masstamilan.dev";
-    const found = songstate.filter((song) => song.title === songname);
-    try {
-      const [song128, song320] = await Promise.all([
-        axios.get(
-          "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/getSongURL",
-          {
-            params: {
-              url: baseURL + found[0].songURL128,
-            },
-          }
-        ),
-        axios.get(
-          "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/getSongURL",
-          {
-            params: {
-              url: baseURL + found[0].songURL320,
-            },
-          }
-        ),
-      ]);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   useEffect(() => {
     async function loadMusic() {
@@ -109,9 +82,12 @@ export default function Songs({ songs, url }) {
                   />
                 </TableCell>
                 <TableCell align="left">
-                  <IconButton onClick={(e) => handleClick(e, song.title)}>
-                    <FileDownloadOutlinedIcon />
-                  </IconButton>
+                  <Download
+                    {...{
+                      songstate,
+                      curr: song.title,
+                    }}
+                  />
                 </TableCell>
               </TableRow>
             ))}
