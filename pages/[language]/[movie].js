@@ -16,6 +16,10 @@ import MoreBy from "../../components/MoreBy";
 
 export const getServerSideProps = async (context) => {
   const query = context.query.movie;
+  const fullURL = context.req.headers.host + context.req.url;
+  // console.log(urlPath);
+  // console.log(context.req.headers.host);
+  // console.log(context.req.url);
   //https://oyster-app-l4qvg.ondigitalocean.app/afo-backend
   const data = await axios.get(
     `https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies/${query}`
@@ -23,12 +27,12 @@ export const getServerSideProps = async (context) => {
   const movie = await data.data.data;
   // console.log(data);
   const musicOther = await data.data.musicOther;
-  return { props: { movie, musicOther } };
+  return { props: { movie, musicOther, fullURL } };
 };
 
-export default function MovieDetails({ movie, musicOther }) {
-  const router = useRouter();
-  console.log(router);
+export default function MovieDetails({ movie, musicOther, fullURL }) {
+  // const router = useRouter();
+  // console.log(fullURL);
   const headTitle = `${movie.title} ${movie.language} Songs Download - Album by ${movie.music} | FREE4DOWNLOAD.IN`;
   const headDescription = `${
     movie.title
@@ -49,6 +53,7 @@ export default function MovieDetails({ movie, musicOther }) {
     `${movie.title} album songs download by ${movie.music}`,
     `${movie.title} ${movie.year} songs download`,
   ];
+  // const url = window.location.href;
   // const incomingSearch = searchArr.sort(() => Math.random() - 0.5);
   return (
     <>
@@ -62,8 +67,8 @@ export default function MovieDetails({ movie, musicOther }) {
         <meta name="keywords" content={headKeywords} />
         <meta property="og:type" content="music.album" />
         <meta property="og:image" content={headImg} />
-        <meta property="og:url" content={window.location.href} />
-        <link href={window.location.href} rel="canonical" />
+        <meta property="og:url" content={fullURL} />
+        <link href={fullURL} rel="canonical" />
       </Head>
       <MusicCover movie={movie} />
       <Songs songs={movie.songs} url={movie.url} />
