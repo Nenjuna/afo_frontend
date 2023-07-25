@@ -1,5 +1,5 @@
 const EXTERNAL_DATA_URL =
-  "https://free4download.in/afo_backend/api/main/sitemap";
+  "https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/main/sitemap";
 const URL = "https://free4download.in";
 
 function generateSiteMap(movies) {
