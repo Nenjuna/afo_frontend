@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Breadcrumb from "../components/Breadcrumbs";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Box from "@mui/material/Box";
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -71,14 +72,15 @@ export default function MyApp(props) {
                   sx: 2,
                   md: 5,
                 },
-                paddingBottom: 2,
-                paddingTop: 2,
+                paddingBottom: 1,
+                paddingTop: 1,
                 paddingLeft: 2,
               }}
             >
               <Breadcrumb breads={breadcrumbs} />
             </Box>
             <Component {...pageProps} />
+            <Footer />
           </Hydrate>
         </ThemeProvider>
       </CacheProvider>

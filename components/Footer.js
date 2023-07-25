@@ -1,8 +1,8 @@
-import * as React from "react";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
 
-export default function Copyright() {
+export default function Footer() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}

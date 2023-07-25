@@ -1,7 +1,7 @@
 import axios from "axios";
 import List from "@mui/material/List";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Landing from "../../components/Landing";
 import Box from "@mui/material/Box";
 import Head from "next/head";
@@ -13,6 +13,15 @@ function MoviesList(props) {
   const router = useRouter();
   const [page, setPage] = useState(parseInt(router.query.page) || 1);
   const [language, setLanguage] = useState(router.query.language || "tamil");
+
+  // useEffect(() => {
+  //   if (router.query.language !== "tamil") {
+  //     router.push(`/about`, undefined, {
+  //       shallow: true,
+  //     });
+  //   }
+  // }, [language]);
+
   const { data } = useQuery(
     ["movie", page, language],
     async () => {
@@ -40,11 +49,12 @@ function MoviesList(props) {
       shallow: true,
     });
   }
+  const title = `Download latest ${language} movie songs - Free4Download.in`;
 
   return (
     <>
       <Head>
-        <title>Download Tamil Movies</title>
+        <title>{title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <List>
@@ -99,6 +109,7 @@ export default MoviesList;
 export async function getServerSideProps(context) {
   let page = 1;
   let language = "tamil";
+  let lanugages = ["tamil", "hindi", "telugu", "malayalam"];
   if (context.query.page) page = parseInt(context.query.page);
   if (context.query.language) language = context.query.language;
   const queryClient = new QueryClient();
@@ -114,6 +125,17 @@ export async function getServerSideProps(context) {
     );
     return movies.data;
   });
+  console.log(lanugages.includes(language));
+  if (!lanugages.includes(language)) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/about",
+      },
+    };
+  }
+
+  // console.log(queryClient);
 
   return { props: { dehydratedState: dehydrate(queryClient) } };
 }
