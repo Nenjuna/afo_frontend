@@ -60,7 +60,7 @@ export default function Index({ main }) {
 
 export const getServerSideProps = async () => {
   const data = await axios.get(
-    `https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/movies/updated`
+    `https://oyster-app-l4qvg.ondigitalocean.app/afo-backend/api/main/updated`
   );
   const main = await data.data.main;
 
