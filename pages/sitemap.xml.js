@@ -1,4 +1,5 @@
-const EXTERNAL_DATA_URL = "http://localhost:8000/api/main/sitemap";
+const EXTERNAL_DATA_URL =
+  "https://free4download.in/afo_backend/api/main/sitemap";
 const URL = "https://free4download.in";
 
 function generateSiteMap(movies) {
