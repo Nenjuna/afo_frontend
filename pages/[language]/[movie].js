@@ -27,7 +27,7 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         permanent: false,
-        destination: "/about",
+        destination: "/404",
       },
     };
   return { props: { movie, musicOther, fullURL } };

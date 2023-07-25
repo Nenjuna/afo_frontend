@@ -51,7 +51,6 @@ export default function MyApp(props) {
 
     setBreadcrumbs(breadcrumbs);
   }, [router.asPath]);
-  // console.log(breadcrumbs);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -77,7 +76,11 @@ export default function MyApp(props) {
                 paddingLeft: 2,
               }}
             >
-              <Breadcrumb breads={breadcrumbs} />
+              {breadcrumbs?.length > 0 ? (
+                <Breadcrumb breads={breadcrumbs} />
+              ) : (
+                ""
+              )}
             </Box>
             <Component {...pageProps} />
             <Footer />

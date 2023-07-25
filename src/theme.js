@@ -1,9 +1,13 @@
 import { Roboto } from "next/font/google";
+import { Poppins } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import { Nanum_Gothic } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
-export const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
+export const roboto = Nanum_Gothic({
+  // weight: ["300", "400", "500", "700"],
+  weight: ["400", "700", "800"],
   subsets: ["latin"],
   display: "swap",
   fallback: ["Helvetica", "Arial", "sans-serif"],

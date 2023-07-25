@@ -5,10 +5,10 @@ import Box from "@mui/material/Box";
 import MainLanding from "../components/MainLanding";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import { Link } from "@mui/material";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 export default function Index({ main }) {
-  // console.log(main);
-
   return (
     <Box
       sx={{
@@ -17,33 +17,37 @@ export default function Index({ main }) {
         gap: "10px",
         alignItems: "center",
         justifyContent: "center",
-        width: "100%",
+        height: "100%",
       }}
     >
       {main.map((lan) => (
-        <Box key={lan._id}>
+        <Box
+          key={lan._id}
+          sx={{
+            width: "auto",
+            paddingLeft: 5,
+            paddingBottom: 2,
+            paddingTop: 2,
+            paddingRight: 2,
+          }}
+        >
           <Typography
+            variant="h3"
             component="h2"
             sx={{
-              paddingLeft: 5,
+              paddingBottom: 2,
             }}
           >
-            Latest {lan._id} Updates | Download {lan._id}
-            Songs
+            {`Latest ${lan._id} Updates - Download ${lan._id} Songs`}
           </Typography>
 
           <Box
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              flexGrow: 1,
-              paddingLeft: 5,
-              paddingBottom: 2,
-              paddingTop: 2,
-              maxWidth: {
-                xs: "100%",
-                md: "70%",
-              },
+              // paddingLeft: 5,
+              // paddingBottom: 2,
+              // paddingTop: 2,
               gap: "20px",
             }}
           >
@@ -51,7 +55,26 @@ export default function Index({ main }) {
               <MainLanding movie={movie} key={movie.title} />
             ))}
           </Box>
-          {/* <Divider variant="middle" /> */}
+          <Link
+            href={`/${lan._id.toLowerCase()}`}
+            style={{ textDecoration: "underline" }}
+            color="secondary"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Typography
+              align="right"
+              variant="h5"
+              component="h3"
+              display="flex"
+            >
+              {`Find all ${lan._id} movie songs here`}
+            </Typography>
+            <KeyboardDoubleArrowRightIcon />
+          </Link>
         </Box>
       ))}
     </Box>
@@ -68,7 +91,7 @@ export const getServerSideProps = async () => {
     return {
       redirect: {
         permanent: false,
-        destination: "/about",
+        destination: "/404",
       },
     };
   return { props: { main } };
